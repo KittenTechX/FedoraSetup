@@ -97,7 +97,7 @@ root_check () {
 		consent_check
 	else
 		echo "You do not have permission to run this script!"
-		echo "Please run with 'sudo ./FedoraScript.sh'"
+		echo "Please run with 'sudo ./FedoraSetup.sh'"
 		sleep 3
 	fi
 }
