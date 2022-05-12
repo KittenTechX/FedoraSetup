@@ -7,9 +7,12 @@
 ammend_dnf () {
 	echo "Optimising the DNF Config..."
 	sleep 1
+	echo "# Optimisation of the DNF Config by Minimeeh" >> /etc/dnf/dnf.conf
 	echo "fastestmirror=True" >> /etc/dnf/dnf.conf
 	echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
 	echo "defaultyes=True" >> /etc/dnf/dnf.conf
+	echo "keepcache=True" >> /etc/dnf/dnf.conf
+	echo "# End of ammendments by Minimeeh" >> /etc/dnf/dnf.conf
 	echo "Optimisation complete."
 	echo " "
 }
@@ -28,7 +31,7 @@ update_system () {
 free_fusion () {
 	echo "Enabling RPM Fusion (Free)..."
 	sleep 1
-	dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+	dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
 	echo " "
 	echo "RPM Fusion (Free) Enabled!"
 	echo " "
@@ -38,9 +41,19 @@ free_fusion () {
 nonfree_fusion () {
 	echo "Enabling RPM Fusion (Non-Free)..."
 	sleep 1
-	dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+	dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 	echo " "
 	echo "RPM Fusion (Non-Free) Enabled!"
+	echo " "
+}
+
+# Enable Flathub Repo for Flatpaks
+flathub() {
+	echo "Enabling Flathub Repo for Flatpaks..."
+	sleep 1
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	echo " "
+	echo "Flathub Repo Enabled!"
 	echo " "
 }
 
@@ -48,9 +61,9 @@ nonfree_fusion () {
 multimedia_codecs () {
 	echo "Installing Multimedia Codecs..."
 	sleep 1
-	dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
-	dnf install lame\* --exclude=lame-devel
-	dnf group upgrade --with-optional Multimedia
+	dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel -y
+	dnf install lame\* --exclude=lame-devel -y
+	dnf group upgrade --with-optional Multimedia -y
 	echo " "
 	echo "Multimedia Codecs installed successfully."
 	echo " "
@@ -63,6 +76,7 @@ fedora_setup () {
 	update_system
 	free_fusion
 	nonfree_fusion
+	flathub
 	multimedia_codecs
 	update_system
 	sleep 1
