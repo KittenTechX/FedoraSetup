@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Purpose: To setup Fedora 36 from a fresh install
-# Author: Minimeeh
+# Author: KittenTechX
 # Depencencies: Fedora 36, DNF and an Internet Connection
 
 # Optimise the DNF config file
