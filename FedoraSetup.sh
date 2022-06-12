@@ -1,18 +1,18 @@
 #!/usr/bin/bash
-# Purpose: To setup Fedora 35 from a fresh install
-# Author: Minimeeh
-# Depencencies: Fedora 35, DNF and an Internet Connection
+# Purpose: To setup Fedora 36 from a fresh install
+# Author: KittenTechX
+# Depencencies: Fedora 36, DNF and an Internet Connection
 
 # Optimise the DNF config file
 ammend_dnf () {
 	echo "Optimising the DNF Config..."
 	sleep 1
-	echo "# Optimisation of the DNF Config by Minimeeh" >> /etc/dnf/dnf.conf
+	echo "# Optimisation of the DNF Config by KittenTechX" >> /etc/dnf/dnf.conf
 	echo "fastestmirror=True" >> /etc/dnf/dnf.conf
 	echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
 	echo "defaultyes=True" >> /etc/dnf/dnf.conf
 	echo "keepcache=True" >> /etc/dnf/dnf.conf
-	echo "# End of ammendments by Minimeeh" >> /etc/dnf/dnf.conf
+	echo "# End of ammendments by KittenTechX" >> /etc/dnf/dnf.conf
 	echo "Optimisation complete."
 	echo " "
 }
@@ -21,7 +21,7 @@ ammend_dnf () {
 update_system () {
 	echo "Checking the system for updates..."
 	sleep 1
-	dnf update
+	dnf update -y
 	echo " "
 	echo "System updated successfully!"
 	echo " "
